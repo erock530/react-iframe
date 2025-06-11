@@ -1,0 +1,50 @@
+{
+  "rules": [
+    {
+      "description": "Follow project formatting rules",
+      "patterns": ["**/*.{js,jsx,ts,tsx,json,md}"],
+      "instruction": "Use single quotes, no semicolons, 2-space indentation, and LF line endings. Format code according to the project's Prettier configuration."
+    },
+    {
+      "description": "React component best practices",
+      "patterns": ["**/*.{jsx,tsx}"],
+      "instruction": "Use functional components with hooks, proper prop destructuring, and meaningful component names. Follow React best practices for state management and lifecycle."
+    },
+    {
+      "description": "Code documentation",
+      "patterns": ["**/*.{js,jsx,ts,tsx}"],
+      "instruction": "Add JSDoc comments for exported functions and components. Include parameter descriptions and return types where appropriate."
+    },
+    {
+      "description": "Import organization",
+      "patterns": ["**/*.{js,jsx,ts,tsx}"],
+      "instruction": "Group imports in this order: 1) React and external libraries, 2) internal modules, 3) relative imports. Sort alphabetically within each group."
+    },
+    {
+      "description": "Error handling",
+      "patterns": ["**/*.{js,jsx,ts,tsx}"],
+      "instruction": "Include proper error handling with try-catch blocks where appropriate. Provide meaningful error messages and graceful fallbacks."
+    },
+    {
+      "description": "Performance optimization",
+      "patterns": ["**/*.{jsx,tsx}"],
+      "instruction": "Use React.memo, useMemo, and useCallback when appropriate to prevent unnecessary re-renders. Avoid creating objects or functions in render methods."
+    }
+  ],
+  "composerRules": [
+    "Write clean, readable code following the project's existing patterns",
+    "Prioritize component reusability and maintainability",
+    "Include TypeScript types when working with .tsx files",
+    "Follow semantic HTML practices for accessibility",
+    "Write unit tests for new components and functions"
+  ],
+  "include": [
+    "**/*.{js,jsx,ts,tsx,json,md,css,scss}"
+  ],
+  "exclude": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    "coverage/**"
+  ]
+}
