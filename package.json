@@ -1,7 +1,7 @@
 {
   "name": "@erock530/react-iframe",
   "version": "1.0.0",
-  "description": "A simple react component that lets you add headers to an iframe.",
+  "description": "A lightweight React component for rendering iframes with custom headers",
   "author": {
     "name": "Erock530",
     "email": "56282917+erock530@users.noreply.github.com",
@@ -12,13 +12,23 @@
     "type": "git",
     "url": "https://github.com/erock530/react-iframe.git"
   },
+  "bugs": {
+    "url": "https://github.com/erock530/react-iframe/issues"
+  },
+  "homepage": "https://github.com/erock530/react-iframe#readme",
   "keywords": [
+    "react",
     "iframe",
-    "react-iframe"
+    "react-component",
+    "headers",
+    "authentication",
+    "embed",
+    "custom-headers"
   ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=22"
   },
@@ -31,14 +41,24 @@
     "test:build": "run-s build",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "publish:npm": "npx yarn build"
+    "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
-  "dependencies": {
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
+    "eslint": "^9.28.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.2.0",
     "microbundle-crl": "^0.13.11",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.5.3",
@@ -46,11 +66,5 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "^5.0.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.28.0",
-    "eslint": "^9.28.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.2.0"
   }
 }
