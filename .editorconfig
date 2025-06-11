@@ -1,0 +1,17 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Ensure all text files use LF
+[*.{js,jsx,ts,tsx,json,md,yml,yaml,html,css,scss,sass}]
+end_of_line = lf
+
+# Batch files on Windows should use CRLF
+[*.{bat,cmd}]
+end_of_line = crlf
