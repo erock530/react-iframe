@@ -43,7 +43,7 @@
     "test:lint": "eslint .",
     "test:build": "run-s build",
     "prepublishOnly": "npm run build",
-    "type-check": "tsc --noEmit --allowJs --checkJs src/index.js"
+    "type-check": "tsc --noEmit"
   },
   "files": [
     "dist",
