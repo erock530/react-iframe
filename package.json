@@ -1,16 +1,16 @@
 {
   "name": "@erock530/react-iframe",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A lightweight React component for rendering iframes with custom headers",
   "author": {
     "name": "Erock530",
-    "email": "56282917+erock530@users.noreply.github.com",
+    "email": "erock3085@gmail.com",
     "url": "https://github.com/erock530"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/erock530/react-iframe.git"
+    "url": "git+https://github.com/erock530/react-iframe.git"
   },
   "bugs": {
     "url": "https://github.com/erock530/react-iframe/issues"

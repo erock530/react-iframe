@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - main
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches:
       - master
@@ -26,6 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -45,3 +48,71 @@ jobs:
           test -f dist/index.js
           test -f dist/index.modern.js
           test -f dist/index.d.ts
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: 'React IFrame Component v${{ steps.version.outputs.VERSION }}'
+          body: |
+            ## 🚀 React IFrame Component v${{ steps.version.outputs.VERSION }}
+
+            ### 📦 Installation
+            ```bash
+            npm install --save @erock530/react-iframe@${{ steps.version.outputs.VERSION }}
+            ```
+
+            ### 🔗 Links
+            - **NPM Package**: https://www.npmjs.com/package/@erock530/react-iframe
+            - **Documentation**: https://github.com/erock530/react-iframe#readme
+            - **Changelog**: https://github.com/erock530/react-iframe/compare/v${{ steps.version.outputs.VERSION }}
+
+            ### ✨ Features
+            - Lightweight React component for iframes with custom headers
+            - Full TypeScript support with IntelliSense
+            - Zero runtime dependencies
+            - Cross-platform compatibility
+
+            See the full changelog and documentation for details.
+          draft: false
+          prerelease: false
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH }}
+
+      - name: Create NPM package summary
+        run: |
+          echo "## 📦 NPM Package Published" >> $GITHUB_STEP_SUMMARY
+          echo "Package: @erock530/react-iframe@${{ steps.version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "NPM: https://www.npmjs.com/package/@erock530/react-iframe" >> $GITHUB_STEP_SUMMARY
+          echo "Install: \`npm install --save @erock530/react-iframe@${{ steps.version.outputs.VERSION }}\`" >> $GITHUB_STEP_SUMMARY
